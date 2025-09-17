@@ -14,9 +14,10 @@ html, body {
   position: relative;
   display: flex;
   width: 100%;
-  height: 60px;
-  padding: 0;
+  height: auto;  /* 高さを自動に */
+  padding: 0.5em 10px; /* 余白を調整 */
   background: blue;
+  align-items: center;  /* 子要素を縦中央に揃える */
 }
 
 .contentnavi p {
@@ -67,14 +68,13 @@ html, body {
 
 /* ロゴ画像は高さ固定をやめて画面高さの割合に */
 .logo {
-  width: 100%;
-  height: auto;
-  max-height: 40vh;  /* 画面高さの40%を最大に */
-  object-fit: cover;
-  object-position: center 40%;
-  display: block;
+  width: 100%; 
+  height: auto;  
+  max-height: 40vh; /* 画面高さの40%を最大に */ 
+  object-fit: cover; 
+  object-position: center 40%; 
+  display: block; 
 }
-
 /* ロゴ上のテキストは画面幅に応じてサイズ変更 */
 .text-on-image {
   position: absolute;
@@ -91,28 +91,32 @@ html, body {
 
 /* メニュー（グローバルナビ） */
 .menu {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
+  list-style: none;
   margin: 0;
-  padding: 0 50px;
-  gap: 80px;
+  padding: 0 2%;       /* パーセント指定で横幅に応じて縮む */
+  display: flex;
+  justify-content: flex-start;
+  gap: 1%;             /* 間隔も画面幅に応じて縮む */
+  font-size: 1.2vw;    /* 文字も画面幅に応じて縮小 */
+  background-color: blue;
 }
 
-/* メニューの幅が狭い画面用に間隔調整 */
-@media screen and (max-width: 900px) {
-  .menu {
-    gap: 40px;
-    padding: 0 30px;
-  }
-}
+
+
+
 @media screen and (max-width: 600px) {
-  .menu {
-    gap: 20px;
-    padding: 0 10px;
+  .menu-header {
+    flex-direction: row; /* 縦並びに */
+    gap: 10px;
+    padding: 0;
+  }
+
+  
+  .menu-link, .menu-item, #logoutBtn {
+    font-size: 12px;  /* ボタンや文字も縮小 */
+    padding: 6px 10px;
   }
 }
-
 /* 右寄せヘッダーメニュー */
 .menu-header {
   list-style: none;
@@ -121,6 +125,8 @@ html, body {
   display: flex;
   justify-content: flex-end;
   gap: 20px;
+  padding: 0 10px;
+  font-size: 14px; /* 少し小さく */
   background-color: blue;
 }
 
@@ -162,16 +168,18 @@ html, body {
   position: relative;
   width: 100vw;
   height: auto;
-  max-height: 60vh; /* 画面高さの60%以内に */
+  max-height: 50vh; /* 画面高さの60%以内に */
   overflow: hidden;
 }
 
 /* ベース画像 */
 .base-image {
-  width: 100vw;
-  height: auto;
-  max-height: 60vh;
-  object-fit: cover;
+  width: 100%;
+  height: 500px;           /* 例: 高さを統一 */
+  object-fit: cover;       /* 中央を維持しつつ切り取り */
+  object-position: center; /* 画像の中央を表示 */
+  border-radius: 8px;
+  max-height: 50vh;
   display: block;
 }
 
@@ -196,10 +204,16 @@ html, body {
   margin-bottom: 10px;
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 15px;
   pointer-events: auto; /* 中身は操作可能 */
 }
-
+@media screen and (max-width: 600px) {
+  .slide {
+    flex-direction: column; /* 横並び→縦並び */
+    gap: 10px;
+    text-align: center;
+  }
+}
 .slide-right {
   transform: translateX(100px);
 }
@@ -228,13 +242,32 @@ html, body {
   word-wrap: break-word;
 }
 
-/* 画像ボックス内の画像 */
-.image-box img {
-  max-width: 600px;
-  width: 100%;
-  border-radius: 8px;
-  display: block;
+/* スマホ用にさらに小さくする */
+@media screen and (max-width: 600px) {
+  .text-box {
+    font-size: 3.5vw;
+  }
+
+  .text-on-image {
+    font-size: 5vw; /* ロゴ上文字も小さく */
+  }
 }
+/* 画像ボックス内の画像 */
+/* PC用：普段は高さ大きめ（自動 or 比率） */
+.image-box img  {
+    max-width: 600px;
+    width: 100%; 
+    object-fit: cover; /* 中央を維持しつつ切り取り */ 
+    object-position: center; /* 画像の中央を表示 */ 
+    border-radius: 8px; display: block;
+    }
+/* スマホ用：幅600px以下で高さを200pxに固定 */
+@media screen and (max-width: 600px) {
+  .image-box img {
+    height: 200px;
+  }
+}
+
 
 /* 追加画像の余白と中央揃え */
 .additional-image {
@@ -250,27 +283,13 @@ html, body {
   display: inline-block;
 }
 
-/* メディアクエリでさらに調整（任意） */
-@media screen and (max-width: 900px) {
-  .text-box {
-    font-size: 3vw;
-  }
-}
 
-@media screen and (max-width: 600px) {
-  .text-box {
-    font-size: 2.5vw;
-  }
-  .text-on-image {
-    font-size: 6vw;
-  }
-}
 
 /* ページ終わり　*/
 .about {
-  max-width: 600px;
-  margin: 40px auto;
-  padding: 20px;
+  max-width: 90%;
+  margin: 43px auto;
+  padding: 15px;
   background: #fff;
   border-radius: 15px;
   box-shadow: 0 5px 20px rgba(0,0,0,0.1);
@@ -362,13 +381,6 @@ td.name {
 .waku7 { background-color: #ff7f00; color: white;} /* 橙 */
 .waku8 { background-color: #ff69b4; color: white;} /* 桃 */
 
-/* スマホ対応 */
-@media (max-width: 600px) {
-  table {
-    width: 100%; 
-    font-size: 14px;
-  }
-}
 
 /* form-common.css */
 .form-container {
@@ -398,3 +410,4 @@ td.name {
   text-align: center;
   margin-top: 15px;
 }
+
