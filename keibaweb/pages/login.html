@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ログイン | 競馬スタイル</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    
+    .form-container button {
+      width: 100%;
+      padding: 12px;
+      background: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .form-container button:hover {
+      background: #0056b3;
+    }
+  
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>ログイン</h2>
+    <form id="loginForm">
+      <input type="email" name="email" placeholder="メールアドレス" required>
+      <input type="password" name="password" placeholder="パスワード" required>
+      <button type="submit">ログイン</button>
+    </form>
+    <div class="link">
+      <p>アカウントをお持ちでない方は <a href="singup.html">新規登録</a></p>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      // 本来はここでサーバーに送信して認証する処理を書く
+      // （今回はデモとして必ず成功扱いにする）
+      localStorage.setItem("isLoggedIn", "true");
+
+      // ログイン成功したらトップへ戻る
+      window.location.href = "../index.html";
+    });
+  </script>
+</body>
+
+</html>

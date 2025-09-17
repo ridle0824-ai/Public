@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>新規登録 | 競馬スタイル</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+ 
+    .form-container button {
+      width: 100%;
+      padding: 12px;
+      background: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .form-container button:hover {
+      background: #218838;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>新規登録</h2>
+    <form id="signupForm">
+      <input type="text" name="username" placeholder="ユーザー名" required>
+      <input type="email" name="email" placeholder="メールアドレス" required>
+      <input type="password" name="password" placeholder="パスワード" required>
+      <input type="password" name="password_confirm" placeholder="パスワード（確認）" required>
+      <button type="submit">登録</button>
+    </form>
+    <div class="link">
+      <p>すでにアカウントをお持ちの方は <a href="login.html">ログイン</a></p>
+    </div>
+  </div>
+
+  <script>
+    // 新規登録フォームのIDに合わせて取得
+    document.getElementById("signupForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // 画面リロード防止
+
+      // 本来はここでサーバーに送信して登録処理を書く
+      // （今回はデモとして必ず成功扱いにする）
+      localStorage.setItem("isLoggedIn", "true");
+
+      // 登録成功後にトップページへ遷移
+      window.location.href = "../index.html";
+    });
+  </script>
+</body>
+
+</html>

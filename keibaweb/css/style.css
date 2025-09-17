@@ -1,0 +1,400 @@
+/* リセット */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: sans-serif;
+}
+
+/* ナビゲーションの親 */
+.contentnavi {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 60px;
+  padding: 0;
+  background: blue;
+}
+
+.contentnavi p {
+  margin: 0;
+}
+
+/* ヘッダー */
+.header {
+  position: relative;
+  width: 100%;
+  padding: 0;
+  background: transparent;
+}
+
+/* アイコン用の簡単なスタイル */
+.user-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.user-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+#logoutBtn {
+  background-color: white;    /* 背景を他のアクティブメニューと同じに */
+  color: blue;                /* 文字色を青に */
+  font-weight: 700;           /* 太字 */
+  border: none;               /* 枠線はなし */
+  cursor: pointer;
+  font-size: 14px;
+  padding: 8px 12px;          /* メニューと同じくらいの余白 */
+  border-radius: 6px;         /* 丸みをつけたい場合 */
+}
+
+#logoutBtn:hover {
+  background-color: #e0e0e0;  /* ホバーで少し色を変える */
+}
+
+
+
+/* ロゴ画像は高さ固定をやめて画面高さの割合に */
+.logo {
+  width: 100%;
+  height: auto;
+  max-height: 40vh;  /* 画面高さの40%を最大に */
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+}
+
+/* ロゴ上のテキストは画面幅に応じてサイズ変更 */
+.text-on-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 8vw; /* 画面幅の8% */
+  text-shadow: 1px 1px 3px black;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* メニュー（グローバルナビ） */
+.menu {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  margin: 0;
+  padding: 0 50px;
+  gap: 80px;
+}
+
+/* メニューの幅が狭い画面用に間隔調整 */
+@media screen and (max-width: 900px) {
+  .menu {
+    gap: 40px;
+    padding: 0 30px;
+  }
+}
+@media screen and (max-width: 600px) {
+  .menu {
+    gap: 20px;
+    padding: 0 10px;
+  }
+}
+
+/* 右寄せヘッダーメニュー */
+.menu-header {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  background-color: blue;
+}
+
+/* メニューアイテム */
+.menu-item {
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: 5px;
+  user-select: none;
+  transition: background-color 0.3s;
+  white-space: nowrap;
+}
+
+.menu-item:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+.menu-item.active {
+  background-color: white;
+  color: blue;
+  font-weight: 700;
+}
+
+.menu-link {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  padding: 10px 15px;
+}
+
+.menu-link:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+/* 画像コンテナ */
+.image-container {
+  position: relative;
+  width: 100vw;
+  height: auto;
+  max-height: 60vh; /* 画面高さの60%以内に */
+  overflow: hidden;
+}
+
+/* ベース画像 */
+.base-image {
+  width: 100vw;
+  height: auto;
+  max-height: 60vh;
+  object-fit: cover;
+  display: block;
+}
+
+/* 画像の上に重ねるコンテンツ */
+.content {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none; /* クリックを画像に通す */
+}
+
+/* スライド要素 */
+.slide {
+  opacity: 0;
+  transition: all 0.6s ease-out;
+  position: relative;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  pointer-events: auto; /* 中身は操作可能 */
+}
+
+.slide-right {
+  transform: translateX(100px);
+}
+
+.slide-right.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.slide-left {
+  transform: translateX(-100px);
+}
+
+.slide-left.active {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* テキストボックス */
+.text-box {
+  flex: 1;
+  max-width: 600px;
+  text-align: center;
+  color: white;
+  font-size: 4vw; /* 画面幅の割合でサイズ調整 */
+  word-wrap: break-word;
+}
+
+/* 画像ボックス内の画像 */
+.image-box img {
+  max-width: 600px;
+  width: 100%;
+  border-radius: 8px;
+  display: block;
+}
+
+/* 追加画像の余白と中央揃え */
+.additional-image {
+  margin-top: 40px;
+  width: 100%;
+  text-align: center;
+}
+
+.additional-image img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  display: inline-block;
+}
+
+/* メディアクエリでさらに調整（任意） */
+@media screen and (max-width: 900px) {
+  .text-box {
+    font-size: 3vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .text-box {
+    font-size: 2.5vw;
+  }
+  .text-on-image {
+    font-size: 6vw;
+  }
+}
+
+/* ページ終わり　*/
+.about {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  text-align: center;
+  font-family: 'Helvetica Neue', sans-serif;
+}
+
+.about h2 {
+  margin-bottom: 20px;
+  font-size: 1.8em;
+  color: #333;
+}
+
+.profile-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ddd;
+  margin-bottom: 15px;
+}
+
+.name {
+  font-size: 1.4em;
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+.title {
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.desc {
+  color: #555;
+  line-height: 1.6;
+}
+
+.contact a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.contact a:hover {
+  text-decoration: underline;
+}
+
+body {
+  font-family: "Yu Gothic", sans-serif;
+  background-color: #f9f9f9;
+}
+
+.title {
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  width: 80%;              
+  margin: 20px auto;       
+  background-color: white; 
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+th {
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: center;
+}
+
+td {
+  border: 1px solid #ccc;
+  padding: 6px 10px;
+  text-align: center;
+}
+
+td.name {
+  text-align: left;
+}
+
+/* 枠番カラー */
+.waku1 { background-color: #ffffff; } /* 白 */
+.waku2 { background-color: #000000; color: white; } /* 黒 */
+.waku3 { background-color: #ff0000; color: white; } /* 赤 */
+.waku4 { background-color: #0000ff; color: white; } /* 青 */
+.waku5 { background-color: #3cff00; color: white;} /* 黄 */
+.waku6 { background-color: #008000; color: white; } /* 緑 */
+.waku7 { background-color: #ff7f00; color: white;} /* 橙 */
+.waku8 { background-color: #ff69b4; color: white;} /* 桃 */
+
+/* スマホ対応 */
+@media (max-width: 600px) {
+  table {
+    width: 100%; 
+    font-size: 14px;
+  }
+}
+
+/* form-common.css */
+.form-container {
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.form-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+.form-container .link {
+  text-align: center;
+  margin-top: 15px;
+}
